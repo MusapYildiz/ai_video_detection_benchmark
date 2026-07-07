@@ -11,9 +11,6 @@ Tamamen yapay zeka tarafından üretilmiş videoları (Sora, Veo, Kling, Runway 
 ai_video_detector/
   README.md              Bu dosya
   download_dataset.py    GenVideo-100K seçici indirme scripti
-  refactor_paths.py      İç scriptlerdeki mutlak sunucu yollarını AEGIS_BASE_DIR
-                          ortam değişkenine çeviren tek-seferlik refactor aracı
-                          (repoyu başka bir sunucuda çalıştırılabilir kılmak için)
   src/
     branches/             Model kodu + veri/eğitim/analiz pipeline'ı (bkz. Kod Dosyaları)
     utils/video_io.py     Video okuma/decode yardımcıları
