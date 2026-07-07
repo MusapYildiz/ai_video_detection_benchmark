@@ -208,18 +208,42 @@ REAL (~27,500): Kinetics-400 (15K), HD-VG-130M (8K), MSR-VTT/Youku (4.5K)
 Format: .pt tensor (16, 3, 224, 224) float16
 ```
 
+### Eğitim Verisini Nereden İndirebilirsin
+
+`build_final_dataset.py`'deki `FAKE_SOURCES`/`REAL_SOURCES` yollarına bakılırsa veri iki
+farklı toplama/döneme ait: `datasets/genvidbench/` (daha yeni, "GenVidBench" akademik
+benchmark'ı) ve `datasets/genvideo/` (daha eski, ModelScope "GenVideo-100K"/DeMamba seti —
+zaten `download_dataset.py` ile bu repoda indirilebiliyor). Aynı üreticinin (ör. Pika, SVD)
+iki kaynaktan da örneği var (`_new`/`_old` etiketli) — birebir aynı 43,857 satırı
+reprodüklemek için ikisi de gerekiyor.
+
+| Klasör | Kaynak | İndirme |
+|---|---|---|
+| `genvidbench/extracted/fake/{ms,t2vz,pika,vc2,svd,cogvideo,mora}` + `.../real/hd_vg_130m` | GenVidBench | `hf download jian-0/GenVidBench --repo-type dataset --local-dir .../genvidbench` ¹ |
+| `genvideo/extracted/fake/{OpenSora,pika,SVD,SEINE,Latte}` + `.../real/msrvtt_youku` | GenVideo-100K (ModelScope) | Bu repodaki `python3 download_dataset.py --full` (veya `--light`) |
+| `kinetics400/videos` | Kinetics-400 | [github.com/cvdfoundation/kinetics-dataset](https://github.com/cvdfoundation/kinetics-dataset) (resmi) |
+| `genvidbench/extracted/fake/veo3` | Veo3 | Kaynağı kod içinde belgelenmemiş — muhtemelen elle toplanmış |
+| `genvidbench/raw/local/{kling,sora}` | Kling / Sora | Kaynağı kod içinde belgelenmemiş (`raw/local` — elle eklenmiş); GenVidBench'in `6.7m` alt kümesinde (`keling.zip`, `OpenAI_Sora.zip`) aynı içerik olabilir ama doğrulanmadı |
+| `aigvdbench/extracted/fake/{Gen2,Luma}` | AIGVDBench | Aşağıdaki Test Setleri bölümüne bakın (yazarlardan istek üzerine) |
+
+¹ `jian-0/GenVidBench`, HF'de "GenVidBench" adıyla arattığımızda bulduğumuz, en çok indirilen
+(1676) topluluk mirror'ı — dosya adları (`ms.rar`, `pika.rar`, `t2vz.rar`, `vc2.rar`,
+`cogvideo.rar`, `mora.rar`, `svd.rar`, `hd_vg_130m.7z.00N`) projedeki klasör adlarıyla
+birebir örtüşüyor. Resmi/ilk-taraf bir HF org hesabı değil, bu yüzden kalıcılığı garanti
+değil — indirmeden önce sayfanın hâlâ ayakta olduğunu kontrol edin.
+
 ---
 
 ## Test Setleri (Eğitime Hiç Girmemiş)
 
-| Kaynak | N | Format | Konum |
-|---|---|---|---|
-| AEGIS Hard (keyframe) | 436 | parquet | `.../datasets/aegis/data/*.parquet` |
-| AEGIS Hard (ham video) | 436 | .mp4 | `.../datasets/aegis_full/videos/test_data/` |
-| GenBuster-Bench++ | 2000 | .mp4 | `.../datasets/GenBuster-Bench-plusplus/video/` |
-| AIGVDBench | 250 | .mp4 | `.../datasets/aigvdbench/extracted/fake/` |
-| extra_test (Sora) | 51 | .mp4 | `.../datasets/final_dataset/extra_test.csv` |
-| fresh_real_test | 900 | .mp4 | `.../datasets/final_dataset/fresh_real_test.csv` |
+| Kaynak | N | Format | Konum | İndirme |
+|---|---|---|---|---|
+| AEGIS Hard (keyframe) | 436 | parquet | `.../datasets/aegis/data/*.parquet` | `hf download Clarifiedfish/AEGIS --repo-type dataset` (ungated, `hard_test_set` alt kümesi = 436 satır) |
+| AEGIS Hard (ham video) | 436 | .mp4 | `.../datasets/aegis_full/videos/test_data/` | `hf download Clarifiedfish/AEGIS-Full --repo-type dataset` (ungated, companion dataset — ham video/analiz içerir) |
+| GenBuster-Bench++ | 2000 | .mp4 | `.../datasets/GenBuster-Bench-plusplus/video/` | `hf download l8cv/GenBuster-Bench-plusplus --repo-type dataset` — **gated**: önce huggingface.co/datasets/l8cv/GenBuster-Bench-plusplus sayfasında erişim talebini kabul etmeniz gerekiyor |
+| AIGVDBench | 250 | .mp4 | `.../datasets/aigvdbench/extracted/fake/` | Kamuya açık indirme linki bulunamadı — yazarlardan istek üzerine temin edilmiş (kapalı kaynak modeller: Sora, Kling, Gen2, Gen3, Luma) |
+| extra_test (Sora) | 51 | .mp4 | `.../datasets/final_dataset/extra_test.csv` | `build_final_dataset.py`'nin `genvidbench/raw/local/sora`'dan türettiği alt küme — kaynağı yukarıdaki tabloya bakın |
+| fresh_real_test | 900 | .mp4 | `.../datasets/final_dataset/fresh_real_test.csv` | Ayrı indirilmez — `build_fresh_real_test.py` ile zaten indirilmiş Kinetics-400/HD-VG-130M/MSR-VTT'den türetilir |
 
 ---
 
@@ -364,7 +388,21 @@ results/phase2/  (sunucuda: checkpoints/phase2/)
 Karşılaştırılan 6 modelin (CoCoVideo, VideoVeritas, Skyra, IvyFake, BusterX, D3) **tam kodu**
 sadece sunucuda, `other_models/` altında tutuluyor — lisans ve boyut (checkpoint'ler dahil
 GB'larca) nedeniyle repoya dahil edilmiyor (gitignore'lu). Her model için orijinal `infer.py`
-scripti var, aynı test videolarını kullanıyor.
+scripti var, aynı test videolarını kullanıyor. Kendi kopyanızı çekmek için:
+
+```bash
+mkdir -p other_models && cd other_models
+git clone https://github.com/l8cv/BusterX.git
+git clone https://github.com/DonoToT/CoCoVideo.git
+git clone https://github.com/Zig-HS/D3.git
+git clone https://github.com/Pi3AI/IvyFake.git
+git clone https://github.com/JoeLeelyf/Skyra.git
+git clone https://github.com/EricTan7/VideoVeritas.git
+```
+
+Her modelin kendi `README`/lisans dosyasındaki kurulum ve ağırlık indirme talimatını
+ayrıca izlemeniz gerekir (bu repo sadece adapte edilmiş inference wrapper'larını içerir,
+model ağırlıklarını değil).
 
 Repoda yayınlanan public karşılığı **`benchmark_scripts/`** klasörü:
 
