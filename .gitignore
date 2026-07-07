@@ -15,6 +15,10 @@ datasets/
 *.avi
 manifest_*.csv
 
+# Istisna: results/ altindaki kucuk skor dosyalari yayinlanan analiz ciktisi,
+# ham dataset degil - README'de belgelendigi icin pushlaniyor
+!results/phase2/scores/*.jsonl
+
 # Python cache / sanal ortamlar
 __pycache__/
 *.pyc

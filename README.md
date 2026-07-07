@@ -32,9 +32,7 @@ Kendi sunucunuzda çalıştırmak için `export AEGIS_BASE_DIR=/senin/yolun` yet
 
 ## Kullanım
 
-Bu bölüm, sistemi baştan kurup çalıştırmak için gereken adımları özetler. Repoda
-`requirements.txt` yok (henüz eklenmedi) — aşağıdaki paket listesi kaynak koddaki
-import'lardan çıkarıldı.
+Bu bölüm, sistemi baştan kurup çalıştırmak için gereken adımları özetler.
 
 ### 1) Ortam Kurulumu
 
@@ -42,9 +40,10 @@ import'lardan çıkarıldı.
 # Python 3.10 ile test edildi
 python3 -m venv venv && source venv/bin/activate
 
-pip install torch torchvision           # CUDA'lı GPU için uygun torch sürümünü kurun
-pip install timm einops opencv-python numpy scipy pandas tqdm \
-            matplotlib scikit-learn safetensors pillow
+# torch/torchvision CUDA sürümüne göre ayrı kurulmalı, ör:
+pip install torch==2.5.0 torchvision==0.20.0 --index-url https://download.pytorch.org/whl/cu121
+
+pip install -r requirements.txt
 
 export AEGIS_BASE_DIR=/senin/yolun      # datasets/ ve checkpoints/ hangi kökte olacak
 ```
@@ -390,3 +389,13 @@ recall'ü retry-only ile yanlışlıkla 0.50 çıkmıştı, merge sonrası doğr
 ## Bağlam: Paralel Chat
 
 Bu projenin **6 açık kaynak model karşılaştırması** ayrı bir Claude chat'te yürütüldü. Sonuçlar `comparison_report.csv`'de birleştirildi ve `build_benchmark_table.py` ile ana tabloya eklendi. İleride yeni modeller eklenince aynı scripti çalıştırmak yeterli.
+
+---
+
+## Lisans
+
+AEGIS'in kendi kodu (`src/`, `download_dataset.py`) MIT lisansı ile yayınlanıyor — bkz. `LICENSE`.
+
+`benchmark_scripts/` altındaki `infer_*.py` scriptleri, karşılaştırılan modellerin (BusterX,
+CoCoVideo, IvyFake, VideoVeritas, Skyra) orijinal kodundan **adapte edilmiştir** ve o
+projelerin kendi lisans koşullarına tabidir — bu dosyalar MIT kapsamında değildir.
