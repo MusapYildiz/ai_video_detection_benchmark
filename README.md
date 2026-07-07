@@ -5,6 +5,34 @@ Tamamen yapay zeka tarafından üretilmiş videoları (Sora, Veo, Kling, Runway 
 
 ---
 
+## Repo Yapısı
+
+```
+ai_video_detector/
+  README.md              Bu dosya
+  download_dataset.py    GenVideo-100K seçici indirme scripti
+  refactor_paths.py      İç scriptlerdeki mutlak sunucu yollarını AEGIS_BASE_DIR
+                          ortam değişkenine çeviren tek-seferlik refactor aracı
+                          (repoyu başka bir sunucuda çalıştırılabilir kılmak için)
+  src/
+    branches/             Model kodu + veri/eğitim/analiz pipeline'ı (bkz. Kod Dosyaları)
+    utils/video_io.py     Video okuma/decode yardımcıları
+  benchmark_scripts/      Diğer 6 modelin public inference scriptleri (bkz. ilgili bölüm)
+  results/phase2/         Yayınlanan analiz çıktıları — json/csv/md/png (bkz. Analiz Çıktıları)
+
+  # .gitignore ile dışlanan, sadece sunucuda bulunan klasörler:
+  checkpoints/            Model ağırlıkları (.pt) + ham analiz çıktıları (results/'a kopyalanan kaynak)
+  datasets/               Tüm video/tensor verisi
+  other_models/           6 rakip modelin tam kodu (lisans/boyut nedeniyle yayınlanmıyor)
+```
+
+Sunucuya özel mutlak yollar (`/kullanici_yedek/musap.yildiz/...`) kod içinde
+`AEGIS_BASE_DIR` ortam değişkeni ile parametrize edilmiş
+(`BASE_DIR = os.environ.get("AEGIS_BASE_DIR", "/kullanici_yedek/musap.yildiz")`).
+Kendi sunucunuzda çalıştırmak için `export AEGIS_BASE_DIR=/senin/yolun` yeterli.
+
+---
+
 ## Mimari (Faz 2 — Aktif)
 
 ```
@@ -86,34 +114,69 @@ Format: .pt tensor (16, 3, 224, 224) float16
 
 ## Kod Dosyaları
 
+### Model çekirdeği
 ```
 src/branches/
   pixel_branch.py        DINOv2 + LNP + FFT, dino_feats çıktıya eklendi
   motion_branch.py       LightFlowNet + TemporalTransformer (değişmedi)
-  consistency_branch.py  YENİ — Semantic Stability Branch
+  consistency_branch.py  Semantic Stability Branch
   detector_model.py      v2 — TripleFusion + 7 kombinasyon + pos_weight=1.0
+```
+
+### Veri hazırlama pipeline'ı
+```
+  build_final_dataset.py    Tüm kaynaklardan örnekleme yapar, train/val split oluşturur;
+                             AEGIS + GenVidBench-Sora'yı hiç eğitime sokmadan extra_test
+                             olarak ayırır
+  preprocess_dataset.py     Videoları önceden işleyip tensöre çevirir (erken sürüm)
+  preprocess_final.py       Final dataset (train/val) için ön-işleme — 16 frame window
+                             sampling, (16,3,224,224) float16 tensor. Worker'lar içinde
+                             SIGALRM tabanlı gerçek zaman-sınırı koruması var: takılan bir
+                             video işleme, ProcessPoolExecutor future-timeout'undan daha
+                             güvenilir şekilde, pipeline'ı kilitlemeden bir sonraki göreve geçer
+  dataset_loader.py         Gerçek video datasetleri için PyTorch Dataset/DataLoader
+  build_fresh_real_test.py  Garantili görülmemiş 900 real video test seti
+  test_aigvdbench.py        AIGVDBench zip dosyalarını açar ve test eder
+  extract_dataset.sh        GenVideo-100K arşivlerini açan shell scripti
+```
+
+### Eğitim / inference
+```
   train.py               Faz 2 eğitim scripti (final_dataset CSV'leri)
+  inference.py            Tek video veya klasör üzerinde inference CLI'ı
+```
+
+### Değerlendirme / analiz
+```
   ablation_eval.py       7 kombinasyon × 6 kaynak, timing+bellek ölçümü
   build_benchmark_table.py  Tüm modelleri benchmark_table.md/csv'ye yazar
+  build_full_comparison.py  Bizim model + diğer 5 model, TÜM test setlerinde
+                          (AEGIS/GenBuster/AIGVDBench/extra_test), threshold
+                          tuning YAPILMADAN (varsayılan eşik) karşılaştırma
   branch_analysis.py     Disagreement + Correlation + Confidence histogram
   calibration_analysis.py  ECE + Reliability Diagram + Risk-Coverage Curve
   save_scores.py         7 kombinasyonun ham skorlarını .jsonl'e kaydeder
+  build_calibration_set.py  AEGIS Hard + AIGVDBench + GenVideo real'den
+                          kalibrasyon val seti hazırlar (calibration_set.json)
+  calibrate.py            Temperature Scaling (ECE minimize) + branch-disagreement
+                          tabanlı Uncertainty Threshold
   threshold_tuning.py    Val'de optimal threshold (F1-max) bul, ana kombinasyonu
                           tüm test kaynaklarına uygula (önce/sonra karşılaştırma)
   threshold_tuning_ablation.py  Aynısı ama 7 kombinasyonun HER BİRİ için ayrı ayrı
                           (her kombinasyonun kendi val-optimal eşiği)
-  build_full_comparison.py  Bizim model + diğer 5 model, TÜM test setlerinde
-                          (AEGIS/GenBuster/AIGVDBench/extra_test), threshold
-                          tuning YAPILMADAN (varsayılan eşik) karşılaştırma
-  build_fresh_real_test.py  Garantili görülmemiş 900 real video test seti
 ```
 
 ---
 
 ## Analiz Çıktıları
 
+Scriptler çıktıyı sunucuda `$AEGIS_BASE_DIR/checkpoints/phase2/` altına yazıyor (model
+ağırlıklarıyla aynı klasör). Bu klasör `.pt` dosyaları içerdiği için tamamen gitignore'lu;
+**json/csv/md/png analiz çıktıları** repoya `results/phase2/` altında (aynı iç yapıyla,
+ağırlıklar hariç) kopyalanarak yayınlanıyor — repo içindeki güncel/erişilebilir konum budur.
+
 ```
-checkpoints/phase2/
+results/phase2/  (sunucuda: checkpoints/phase2/)
   benchmark_table.md / .csv      AEGIS'te tüm model karşılaştırması (eski, AEGIS-only)
   full_comparison.md / .csv / .png   Bizim model + 5 model, TÜM test setlerinde
                                   (AEGIS/GenBuster/AIGVDBench/extra_test),
@@ -172,20 +235,38 @@ checkpoints/phase2/
 
 ## Diğer Modeller (Karşılaştırma İçin)
 
+Karşılaştırılan 6 modelin (CoCoVideo, VideoVeritas, Skyra, IvyFake, BusterX, D3) **tam kodu**
+sadece sunucuda, `other_models/` altında tutuluyor — lisans ve boyut (checkpoint'ler dahil
+GB'larca) nedeniyle repoya dahil edilmiyor (gitignore'lu). Her model için orijinal `infer.py`
+scripti var, aynı test videolarını kullanıyor.
+
+Repoda yayınlanan public karşılığı **`benchmark_scripts/`** klasörü:
+
 ```
-$AEGIS_BASE_DIR/ai_video_detector/other_models/
-  CoCoVideo/      VideoVeritas/    Skyra/
-  IvyFake/        BusterX/        D3/
+benchmark_scripts/
+  infer_busterx.py        BusterX için adapte edilmiş inference scripti
+  infer_cocovideo.py      CoCoVideo için adapte edilmiş inference scripti
+  infer_ivyfake.py        IvyFake için adapte edilmiş inference scripti
+  infer_videoveritas.py   VideoVeritas için adapte edilmiş inference scripti
+  skyra_model_engine_hf.py  Skyra için HuggingFace tabanlı model motoru
+  build_manifest.py       Klasör yapısından (test_data/real|kling|sora/*.mp4) ground-truth
+                           manifest üretir — 6 modelin sonuçlarını karşılaştırmak için
+                           ortak referans
   compute_metrics.py      Sonuç CSV/JSON'ları manifest ile birleştirip metrik hesaplar.
                           --fakeonly modu (AIGVDBench/extra_test için) düzeltildi —
                           eskiden final tablo adımında KeyError ile çöküyordu.
+```
+
+(D3 için ayrı bir `eval.py` var, farklı metodoloji kullandığından `compute_metrics.py`
+pipeline'ına dahil değil — bkz. Benchmark Sonuçları'ndaki not.)
+
+Sunucudaki `other_models/` altında ayrıca üretilen ham sonuç raporları (gitignore'lu):
+```
   comparison_report.csv   AEGIS sonuçları (real+fake, n=436)
   report_genbuster.csv    GenBuster-Bench++ sonuçları (real+fake, n=2000)
   report_aigvdbench.csv   AIGVDBench sonuçları (fake-only, n=250, sadece Recall)
   report_extratest.csv    extra_test/Sora sonuçları (fake-only, n=51, sadece Recall)
 ```
-
-Her model için `infer.py` scripti var, aynı test videolarını kullanıyor.
 
 **Not — retry dosyaları:** VideoVeritas ve BusterX'in bazı AIGVDBench/extra_test videolarında
 ilk çalıştırmada `ERROR` dönmüştü, ayrı `*_retry.csv` dosyalarında düzeltilmiş. `report_*.csv`
