@@ -1,0 +1,219 @@
+{
+  "pixel": {
+    "label": "Pixel",
+    "val_n": 4908,
+    "val_auc": 0.9928180545167715,
+    "default_threshold": 0.5,
+    "default_metrics_on_val": {
+      "n": 4908,
+      "tp": 2027,
+      "tn": 2673,
+      "fp": 76,
+      "fn": 132,
+      "accuracy": 0.9576202118989405,
+      "precision": 0.9638611507370424,
+      "recall": 0.9388605836035201,
+      "f1": 0.9511966213045518,
+      "fpr": 0.027646416878865043
+    },
+    "tuned_threshold": 0.040749259293079376,
+    "tuned_metrics_on_val": {
+      "n": 4908,
+      "tp": 2077,
+      "tn": 2640,
+      "fp": 109,
+      "fn": 82,
+      "accuracy": 0.9610839445802771,
+      "precision": 0.9501372369624885,
+      "recall": 0.9620194534506716,
+      "f1": 0.9560414269275028,
+      "fpr": 0.03965078210258276
+    }
+  },
+  "motion": {
+    "label": "Motion",
+    "val_n": 4908,
+    "val_auc": 0.9717601634077725,
+    "default_threshold": 0.5,
+    "default_metrics_on_val": {
+      "n": 4908,
+      "tp": 1775,
+      "tn": 2650,
+      "fp": 99,
+      "fn": 384,
+      "accuracy": 0.9015892420537898,
+      "precision": 0.9471718249733191,
+      "recall": 0.8221398795738768,
+      "f1": 0.880238036201339,
+      "fpr": 0.03601309567115315
+    },
+    "tuned_threshold": 0.2177129089832306,
+    "tuned_metrics_on_val": {
+      "n": 4908,
+      "tp": 1929,
+      "tn": 2579,
+      "fp": 170,
+      "fn": 230,
+      "accuracy": 0.9185004074979625,
+      "precision": 0.9190090519294902,
+      "recall": 0.8934691987031033,
+      "f1": 0.9060591827148897,
+      "fpr": 0.061840669334303384
+    }
+  },
+  "consistency": {
+    "label": "Consistency",
+    "val_n": 4908,
+    "val_auc": 0.9732475037029761,
+    "default_threshold": 0.5,
+    "default_metrics_on_val": {
+      "n": 4908,
+      "tp": 2008,
+      "tn": 2589,
+      "fp": 160,
+      "fn": 151,
+      "accuracy": 0.9366340668296659,
+      "precision": 0.9261992619926199,
+      "recall": 0.9300602130616026,
+      "f1": 0.9281257222093828,
+      "fpr": 0.05820298290287377
+    },
+    "tuned_threshold": 0.785,
+    "tuned_metrics_on_val": {
+      "n": 4908,
+      "tp": 2002,
+      "tn": 2613,
+      "fp": 136,
+      "fn": 157,
+      "accuracy": 0.9403015484922576,
+      "precision": 0.9363891487371375,
+      "recall": 0.9272811486799444,
+      "f1": 0.9318128927158482,
+      "fpr": 0.04947253546744271
+    }
+  },
+  "pixel_motion": {
+    "label": "Pixel+Motion",
+    "val_n": 4908,
+    "val_auc": 0.9980801473810595,
+    "default_threshold": 0.5,
+    "default_metrics_on_val": {
+      "n": 4908,
+      "tp": 2099,
+      "tn": 2693,
+      "fp": 56,
+      "fn": 60,
+      "accuracy": 0.9763651181744091,
+      "precision": 0.9740139211136891,
+      "recall": 0.9722093561834182,
+      "f1": 0.9731108020398702,
+      "fpr": 0.02037104401600582
+    },
+    "tuned_threshold": 0.103,
+    "tuned_metrics_on_val": {
+      "n": 4908,
+      "tp": 2111,
+      "tn": 2686,
+      "fp": 63,
+      "fn": 48,
+      "accuracy": 0.9773838630806846,
+      "precision": 0.9710211591536339,
+      "recall": 0.9777674849467346,
+      "f1": 0.9743826448188322,
+      "fpr": 0.022917424518006546
+    }
+  },
+  "pixel_consistency": {
+    "label": "Pixel+Consistency",
+    "val_n": 4908,
+    "val_auc": 0.9930169562690783,
+    "default_threshold": 0.5,
+    "default_metrics_on_val": {
+      "n": 4908,
+      "tp": 2045,
+      "tn": 2669,
+      "fp": 80,
+      "fn": 114,
+      "accuracy": 0.9604726976365118,
+      "precision": 0.9623529411764706,
+      "recall": 0.9471977767484947,
+      "f1": 0.9547152194211018,
+      "fpr": 0.029101491451436885
+    },
+    "tuned_threshold": 0.141,
+    "tuned_metrics_on_val": {
+      "n": 4908,
+      "tp": 2075,
+      "tn": 2646,
+      "fp": 103,
+      "fn": 84,
+      "accuracy": 0.9618989405052975,
+      "precision": 0.9527089072543617,
+      "recall": 0.9610930986567855,
+      "f1": 0.9568826377680424,
+      "fpr": 0.037468170243724994
+    }
+  },
+  "motion_consistency": {
+    "label": "Motion+Consistency",
+    "val_n": 4908,
+    "val_auc": 0.9939327804746381,
+    "default_threshold": 0.5,
+    "default_metrics_on_val": {
+      "n": 4908,
+      "tp": 2101,
+      "tn": 2637,
+      "fp": 112,
+      "fn": 58,
+      "accuracy": 0.965362673186634,
+      "precision": 0.9493899683687302,
+      "recall": 0.9731357109773043,
+      "f1": 0.9611161939615738,
+      "fpr": 0.04074208803201164
+    },
+    "tuned_threshold": 0.765,
+    "tuned_metrics_on_val": {
+      "n": 4908,
+      "tp": 2089,
+      "tn": 2653,
+      "fp": 96,
+      "fn": 70,
+      "accuracy": 0.9661776691116545,
+      "precision": 0.9560640732265446,
+      "recall": 0.9675775822139879,
+      "f1": 0.9617863720073666,
+      "fpr": 0.03492178974172426
+    }
+  },
+  "pixel_motion_consistency": {
+    "label": "Pixel+Motion+Consistency (ana)",
+    "val_n": 4908,
+    "val_auc": 0.9979761051683959,
+    "default_threshold": 0.5,
+    "default_metrics_on_val": {
+      "n": 4908,
+      "tp": 2106,
+      "tn": 2689,
+      "fp": 60,
+      "fn": 53,
+      "accuracy": 0.9769763651181744,
+      "precision": 0.9722991689750693,
+      "recall": 0.9754515979620194,
+      "f1": 0.9738728323699423,
+      "fpr": 0.021826118588577664
+    },
+    "tuned_threshold": 0.217,
+    "tuned_metrics_on_val": {
+      "n": 4908,
+      "tp": 2115,
+      "tn": 2684,
+      "fp": 65,
+      "fn": 44,
+      "accuracy": 0.9777913610431948,
+      "precision": 0.9701834862385321,
+      "recall": 0.9796201945345067,
+      "f1": 0.9748790043788891,
+      "fpr": 0.02364496180429247
+    }
+  }
+}

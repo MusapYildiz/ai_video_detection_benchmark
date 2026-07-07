@@ -1,0 +1,73 @@
+{
+  "source": "aegis_raw",
+  "checkpoint": "$AEGIS_BASE_DIR/checkpoints/phase2/checkpoint_best.pt",
+  "n_total": 436,
+  "n_real": 218,
+  "n_fake": 218,
+  "overall_accuracy": 0.7935779816513762,
+  "disagreement": {
+    "std": {
+      "correct_mean": 0.17080219661842694,
+      "correct_std": 0.1626347806210427,
+      "wrong_mean": 0.2850738323360717,
+      "wrong_std": 0.15752971638078483
+    },
+    "var": {
+      "correct_mean": 0.05562346223733446,
+      "correct_std": 0.07252222425098323,
+      "wrong_mean": 0.10608270142578521,
+      "wrong_std": 0.07652335633822743
+    },
+    "maxmin": {
+      "correct_mean": 0.36987049768388564,
+      "correct_std": 0.3515122574302433,
+      "wrong_mean": 0.6274258672900033,
+      "wrong_std": 0.34221698419820334
+    },
+    "entropy": {
+      "correct_mean": 0.14863434036144865,
+      "correct_std": 0.0877429942531733,
+      "wrong_mean": 0.206060001765672,
+      "wrong_std": 0.11522117066387082
+    }
+  },
+  "correlation": {
+    "pixel_motion": 0.4103261473346912,
+    "pixel_consistency": 0.8600094686624254,
+    "motion_consistency": 0.3670366710406491
+  },
+  "per_source": {
+    "camera_dvf": {
+      "n": 109,
+      "accuracy": 0.908256880733945,
+      "recall": NaN,
+      "fpr": 0.09174311926605505,
+      "mean_fusion": 0.08733945924784975,
+      "mean_std": 0.13966317435112283
+    },
+    "camera_youtube": {
+      "n": 109,
+      "accuracy": 0.7889908256880734,
+      "recall": NaN,
+      "fpr": 0.21100917431192662,
+      "mean_fusion": 0.22136753589430397,
+      "mean_std": 0.13899095757185498
+    },
+    "kling": {
+      "n": 111,
+      "accuracy": 0.7117117117117117,
+      "recall": 0.7117117117117117,
+      "fpr": NaN,
+      "mean_fusion": 0.7270758329023584,
+      "mean_std": 0.2503563872101171
+    },
+    "sora": {
+      "n": 107,
+      "accuracy": 0.7663551401869159,
+      "recall": 0.7663551401869159,
+      "fpr": NaN,
+      "mean_fusion": 0.758294803361984,
+      "mean_std": 0.2485172484139682
+    }
+  }
+}

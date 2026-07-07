@@ -1,0 +1,57 @@
+{
+  "source": "genbuster",
+  "checkpoint": "$AEGIS_BASE_DIR/checkpoints/phase2/checkpoint_best.pt",
+  "n_total": 2000,
+  "n_real": 1000,
+  "n_fake": 1000,
+  "overall_accuracy": 0.8005,
+  "disagreement": {
+    "std": {
+      "correct_mean": 0.22344653822342794,
+      "correct_std": 0.17468680936215666,
+      "wrong_mean": 0.23131506987991124,
+      "wrong_std": 0.17273799503560974
+    },
+    "var": {
+      "correct_mean": 0.08044383680916432,
+      "correct_std": 0.08267733771833775,
+      "wrong_mean": 0.08334507648247054,
+      "wrong_std": 0.0798656989894315
+    },
+    "maxmin": {
+      "correct_mean": 0.483147031514934,
+      "correct_std": 0.3748780293195313,
+      "wrong_mean": 0.510974024202638,
+      "wrong_std": 0.3813393158883211
+    },
+    "entropy": {
+      "correct_mean": 0.15516178082160714,
+      "correct_std": 0.09577686401183397,
+      "wrong_mean": 0.1837091379442728,
+      "wrong_std": 0.10572788524268469
+    }
+  },
+  "correlation": {
+    "pixel_motion": 0.17773287365375537,
+    "pixel_consistency": 0.8428665115199984,
+    "motion_consistency": 0.18533184570230463
+  },
+  "per_source": {
+    "fake": {
+      "n": 1000,
+      "accuracy": 0.736,
+      "recall": 0.736,
+      "fpr": NaN,
+      "mean_fusion": 0.7366034240239351,
+      "mean_std": 0.28911805439632837
+    },
+    "real": {
+      "n": 1000,
+      "accuracy": 0.865,
+      "recall": NaN,
+      "fpr": 0.135,
+      "mean_fusion": 0.13739159983417448,
+      "mean_std": 0.16091456618146435
+    }
+  }
+}

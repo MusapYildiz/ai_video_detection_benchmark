@@ -1,0 +1,674 @@
+{
+  "aegis_raw": {
+    "label": "AEGIS Hard (ham video)",
+    "n": 436,
+    "fakeonly": false,
+    "combinations": {
+      "pixel": {
+        "label": "Pixel",
+        "tuned_threshold": 0.040749259293079376,
+        "auc": 0.8606283141149735,
+        "before": {
+          "n": 436,
+          "tp": 164,
+          "tn": 180,
+          "fp": 38,
+          "fn": 54,
+          "accuracy": 0.7889908256880734,
+          "precision": 0.8118811881188119,
+          "recall": 0.7522935779816514,
+          "f1": 0.780952380952381,
+          "fpr": 0.1743119266055046
+        },
+        "after": {
+          "n": 436,
+          "tp": 175,
+          "tn": 164,
+          "fp": 54,
+          "fn": 43,
+          "accuracy": 0.7775229357798165,
+          "precision": 0.7641921397379913,
+          "recall": 0.8027522935779816,
+          "f1": 0.7829977628635347,
+          "fpr": 0.24770642201834864
+        }
+      },
+      "motion": {
+        "label": "Motion",
+        "tuned_threshold": 0.2177129089832306,
+        "auc": 0.8120107735039138,
+        "before": {
+          "n": 436,
+          "tp": 96,
+          "tn": 203,
+          "fp": 15,
+          "fn": 122,
+          "accuracy": 0.6857798165137615,
+          "precision": 0.8648648648648649,
+          "recall": 0.44036697247706424,
+          "f1": 0.5835866261398176,
+          "fpr": 0.06880733944954129
+        },
+        "after": {
+          "n": 436,
+          "tp": 138,
+          "tn": 183,
+          "fp": 35,
+          "fn": 80,
+          "accuracy": 0.7362385321100917,
+          "precision": 0.7976878612716763,
+          "recall": 0.6330275229357798,
+          "f1": 0.7058823529411764,
+          "fpr": 0.16055045871559634
+        }
+      },
+      "consistency": {
+        "label": "Consistency",
+        "tuned_threshold": 0.785,
+        "auc": 0.8544314451645484,
+        "before": {
+          "n": 436,
+          "tp": 181,
+          "tn": 157,
+          "fp": 61,
+          "fn": 37,
+          "accuracy": 0.7752293577981652,
+          "precision": 0.7479338842975206,
+          "recall": 0.8302752293577982,
+          "f1": 0.7869565217391306,
+          "fpr": 0.2798165137614679
+        },
+        "after": {
+          "n": 436,
+          "tp": 176,
+          "tn": 160,
+          "fp": 58,
+          "fn": 42,
+          "accuracy": 0.7706422018348624,
+          "precision": 0.7521367521367521,
+          "recall": 0.8073394495412844,
+          "f1": 0.7787610619469026,
+          "fpr": 0.26605504587155965
+        }
+      },
+      "pixel_motion": {
+        "label": "Pixel+Motion",
+        "tuned_threshold": 0.103,
+        "auc": 0.8910866088713071,
+        "before": {
+          "n": 436,
+          "tp": 157,
+          "tn": 188,
+          "fp": 30,
+          "fn": 61,
+          "accuracy": 0.7912844036697247,
+          "precision": 0.839572192513369,
+          "recall": 0.7201834862385321,
+          "f1": 0.7753086419753087,
+          "fpr": 0.13761467889908258
+        },
+        "after": {
+          "n": 436,
+          "tp": 164,
+          "tn": 181,
+          "fp": 37,
+          "fn": 54,
+          "accuracy": 0.7912844036697247,
+          "precision": 0.8159203980099502,
+          "recall": 0.7522935779816514,
+          "f1": 0.7828162291169452,
+          "fpr": 0.16972477064220184
+        }
+      },
+      "pixel_consistency": {
+        "label": "Pixel+Consistency",
+        "tuned_threshold": 0.141,
+        "auc": 0.8668462250652302,
+        "before": {
+          "n": 436,
+          "tp": 167,
+          "tn": 172,
+          "fp": 46,
+          "fn": 51,
+          "accuracy": 0.7775229357798165,
+          "precision": 0.784037558685446,
+          "recall": 0.7660550458715596,
+          "f1": 0.7749419953596287,
+          "fpr": 0.21100917431192662
+        },
+        "after": {
+          "n": 436,
+          "tp": 177,
+          "tn": 168,
+          "fp": 50,
+          "fn": 41,
+          "accuracy": 0.7912844036697247,
+          "precision": 0.7797356828193832,
+          "recall": 0.8119266055045872,
+          "f1": 0.7955056179775281,
+          "fpr": 0.22935779816513763
+        }
+      },
+      "motion_consistency": {
+        "label": "Motion+Consistency",
+        "tuned_threshold": 0.765,
+        "auc": 0.8787033919703728,
+        "before": {
+          "n": 436,
+          "tp": 178,
+          "tn": 170,
+          "fp": 48,
+          "fn": 40,
+          "accuracy": 0.7981651376146789,
+          "precision": 0.7876106194690266,
+          "recall": 0.8165137614678899,
+          "f1": 0.8018018018018018,
+          "fpr": 0.22018348623853212
+        },
+        "after": {
+          "n": 436,
+          "tp": 173,
+          "tn": 174,
+          "fp": 44,
+          "fn": 45,
+          "accuracy": 0.7958715596330275,
+          "precision": 0.7972350230414746,
+          "recall": 0.7935779816513762,
+          "f1": 0.7954022988505747,
+          "fpr": 0.2018348623853211
+        }
+      },
+      "pixel_motion_consistency": {
+        "label": "Pixel+Motion+Consistency (ana)",
+        "tuned_threshold": 0.217,
+        "auc": 0.8910445248716438,
+        "before": {
+          "n": 436,
+          "tp": 161,
+          "tn": 185,
+          "fp": 33,
+          "fn": 57,
+          "accuracy": 0.7935779816513762,
+          "precision": 0.8298969072164949,
+          "recall": 0.7385321100917431,
+          "f1": 0.7815533980582524,
+          "fpr": 0.15137614678899083
+        },
+        "after": {
+          "n": 436,
+          "tp": 168,
+          "tn": 180,
+          "fp": 38,
+          "fn": 50,
+          "accuracy": 0.7981651376146789,
+          "precision": 0.8155339805825242,
+          "recall": 0.7706422018348624,
+          "f1": 0.7924528301886793,
+          "fpr": 0.1743119266055046
+        }
+      }
+    }
+  },
+  "genbuster": {
+    "label": "GenBuster-Bench++",
+    "n": 2000,
+    "fakeonly": false,
+    "combinations": {
+      "pixel": {
+        "label": "Pixel",
+        "tuned_threshold": 0.040749259293079376,
+        "auc": 0.8725475,
+        "before": {
+          "n": 2000,
+          "tp": 749,
+          "tn": 875,
+          "fp": 125,
+          "fn": 251,
+          "accuracy": 0.812,
+          "precision": 0.8569794050343249,
+          "recall": 0.749,
+          "f1": 0.7993596584845252,
+          "fpr": 0.125
+        },
+        "after": {
+          "n": 2000,
+          "tp": 810,
+          "tn": 803,
+          "fp": 197,
+          "fn": 190,
+          "accuracy": 0.8065,
+          "precision": 0.8043694141012909,
+          "recall": 0.81,
+          "f1": 0.8071748878923767,
+          "fpr": 0.197
+        }
+      },
+      "motion": {
+        "label": "Motion",
+        "tuned_threshold": 0.2177129089832306,
+        "auc": 0.511587,
+        "before": {
+          "n": 2000,
+          "tp": 237,
+          "tn": 829,
+          "fp": 171,
+          "fn": 763,
+          "accuracy": 0.533,
+          "precision": 0.5808823529411765,
+          "recall": 0.237,
+          "f1": 0.3366477272727273,
+          "fpr": 0.171
+        },
+        "after": {
+          "n": 2000,
+          "tp": 384,
+          "tn": 709,
+          "fp": 291,
+          "fn": 616,
+          "accuracy": 0.5465,
+          "precision": 0.5688888888888889,
+          "recall": 0.384,
+          "f1": 0.45850746268656717,
+          "fpr": 0.291
+        }
+      },
+      "consistency": {
+        "label": "Consistency",
+        "tuned_threshold": 0.785,
+        "auc": 0.8374375,
+        "before": {
+          "n": 2000,
+          "tp": 816,
+          "tn": 736,
+          "fp": 264,
+          "fn": 184,
+          "accuracy": 0.776,
+          "precision": 0.7555555555555555,
+          "recall": 0.816,
+          "f1": 0.7846153846153846,
+          "fpr": 0.264
+        },
+        "after": {
+          "n": 2000,
+          "tp": 808,
+          "tn": 762,
+          "fp": 238,
+          "fn": 192,
+          "accuracy": 0.785,
+          "precision": 0.7724665391969407,
+          "recall": 0.808,
+          "f1": 0.7898338220918867,
+          "fpr": 0.238
+        }
+      },
+      "pixel_motion": {
+        "label": "Pixel+Motion",
+        "tuned_threshold": 0.103,
+        "auc": 0.8608595,
+        "before": {
+          "n": 2000,
+          "tp": 716,
+          "tn": 879,
+          "fp": 121,
+          "fn": 284,
+          "accuracy": 0.7975,
+          "precision": 0.8554360812425329,
+          "recall": 0.716,
+          "f1": 0.7795318454001088,
+          "fpr": 0.121
+        },
+        "after": {
+          "n": 2000,
+          "tp": 758,
+          "tn": 856,
+          "fp": 144,
+          "fn": 242,
+          "accuracy": 0.807,
+          "precision": 0.8403547671840355,
+          "recall": 0.758,
+          "f1": 0.7970557308096741,
+          "fpr": 0.144
+        }
+      },
+      "pixel_consistency": {
+        "label": "Pixel+Consistency",
+        "tuned_threshold": 0.141,
+        "auc": 0.8690455,
+        "before": {
+          "n": 2000,
+          "tp": 777,
+          "tn": 847,
+          "fp": 153,
+          "fn": 223,
+          "accuracy": 0.812,
+          "precision": 0.8354838709677419,
+          "recall": 0.777,
+          "f1": 0.805181347150259,
+          "fpr": 0.153
+        },
+        "after": {
+          "n": 2000,
+          "tp": 806,
+          "tn": 802,
+          "fp": 198,
+          "fn": 194,
+          "accuracy": 0.804,
+          "precision": 0.8027888446215139,
+          "recall": 0.806,
+          "f1": 0.8043912175648703,
+          "fpr": 0.198
+        }
+      },
+      "motion_consistency": {
+        "label": "Motion+Consistency",
+        "tuned_threshold": 0.765,
+        "auc": 0.846077,
+        "before": {
+          "n": 2000,
+          "tp": 791,
+          "tn": 791,
+          "fp": 209,
+          "fn": 209,
+          "accuracy": 0.791,
+          "precision": 0.791,
+          "recall": 0.791,
+          "f1": 0.791,
+          "fpr": 0.209
+        },
+        "after": {
+          "n": 2000,
+          "tp": 776,
+          "tn": 812,
+          "fp": 188,
+          "fn": 224,
+          "accuracy": 0.794,
+          "precision": 0.8049792531120332,
+          "recall": 0.776,
+          "f1": 0.790224032586558,
+          "fpr": 0.188
+        }
+      },
+      "pixel_motion_consistency": {
+        "label": "Pixel+Motion+Consistency (ana)",
+        "tuned_threshold": 0.217,
+        "auc": 0.869541,
+        "before": {
+          "n": 2000,
+          "tp": 736,
+          "tn": 865,
+          "fp": 135,
+          "fn": 264,
+          "accuracy": 0.8005,
+          "precision": 0.8450057405281286,
+          "recall": 0.736,
+          "f1": 0.786745056119722,
+          "fpr": 0.135
+        },
+        "after": {
+          "n": 2000,
+          "tp": 755,
+          "tn": 848,
+          "fp": 152,
+          "fn": 245,
+          "accuracy": 0.8015,
+          "precision": 0.8324145534729879,
+          "recall": 0.755,
+          "f1": 0.7918196119559517,
+          "fpr": 0.152
+        }
+      }
+    }
+  },
+  "aigvdbench": {
+    "label": "AIGVDBench",
+    "n": 250,
+    "fakeonly": true,
+    "combinations": {
+      "pixel": {
+        "label": "Pixel",
+        "tuned_threshold": 0.040749259293079376,
+        "auc": null,
+        "before": {
+          "n": 250,
+          "detected": 228,
+          "missed": 22,
+          "recall": 0.912
+        },
+        "after": {
+          "n": 250,
+          "detected": 233,
+          "missed": 17,
+          "recall": 0.932
+        }
+      },
+      "motion": {
+        "label": "Motion",
+        "tuned_threshold": 0.2177129089832306,
+        "auc": null,
+        "before": {
+          "n": 250,
+          "detected": 112,
+          "missed": 138,
+          "recall": 0.448
+        },
+        "after": {
+          "n": 250,
+          "detected": 150,
+          "missed": 100,
+          "recall": 0.6
+        }
+      },
+      "consistency": {
+        "label": "Consistency",
+        "tuned_threshold": 0.785,
+        "auc": null,
+        "before": {
+          "n": 250,
+          "detected": 233,
+          "missed": 17,
+          "recall": 0.932
+        },
+        "after": {
+          "n": 250,
+          "detected": 233,
+          "missed": 17,
+          "recall": 0.932
+        }
+      },
+      "pixel_motion": {
+        "label": "Pixel+Motion",
+        "tuned_threshold": 0.103,
+        "auc": null,
+        "before": {
+          "n": 250,
+          "detected": 224,
+          "missed": 26,
+          "recall": 0.896
+        },
+        "after": {
+          "n": 250,
+          "detected": 231,
+          "missed": 19,
+          "recall": 0.924
+        }
+      },
+      "pixel_consistency": {
+        "label": "Pixel+Consistency",
+        "tuned_threshold": 0.141,
+        "auc": null,
+        "before": {
+          "n": 250,
+          "detected": 231,
+          "missed": 19,
+          "recall": 0.924
+        },
+        "after": {
+          "n": 250,
+          "detected": 234,
+          "missed": 16,
+          "recall": 0.936
+        }
+      },
+      "motion_consistency": {
+        "label": "Motion+Consistency",
+        "tuned_threshold": 0.765,
+        "auc": null,
+        "before": {
+          "n": 250,
+          "detected": 232,
+          "missed": 18,
+          "recall": 0.928
+        },
+        "after": {
+          "n": 250,
+          "detected": 232,
+          "missed": 18,
+          "recall": 0.928
+        }
+      },
+      "pixel_motion_consistency": {
+        "label": "Pixel+Motion+Consistency (ana)",
+        "tuned_threshold": 0.217,
+        "auc": null,
+        "before": {
+          "n": 250,
+          "detected": 225,
+          "missed": 25,
+          "recall": 0.9
+        },
+        "after": {
+          "n": 250,
+          "detected": 230,
+          "missed": 20,
+          "recall": 0.92
+        }
+      }
+    }
+  },
+  "extra_test": {
+    "label": "extra_test (Sora)",
+    "n": 51,
+    "fakeonly": true,
+    "combinations": {
+      "pixel": {
+        "label": "Pixel",
+        "tuned_threshold": 0.040749259293079376,
+        "auc": null,
+        "before": {
+          "n": 51,
+          "detected": 36,
+          "missed": 15,
+          "recall": 0.7058823529411765
+        },
+        "after": {
+          "n": 51,
+          "detected": 37,
+          "missed": 14,
+          "recall": 0.7254901960784313
+        }
+      },
+      "motion": {
+        "label": "Motion",
+        "tuned_threshold": 0.2177129089832306,
+        "auc": null,
+        "before": {
+          "n": 51,
+          "detected": 11,
+          "missed": 40,
+          "recall": 0.21568627450980393
+        },
+        "after": {
+          "n": 51,
+          "detected": 18,
+          "missed": 33,
+          "recall": 0.35294117647058826
+        }
+      },
+      "consistency": {
+        "label": "Consistency",
+        "tuned_threshold": 0.785,
+        "auc": null,
+        "before": {
+          "n": 51,
+          "detected": 39,
+          "missed": 12,
+          "recall": 0.7647058823529411
+        },
+        "after": {
+          "n": 51,
+          "detected": 38,
+          "missed": 13,
+          "recall": 0.7450980392156863
+        }
+      },
+      "pixel_motion": {
+        "label": "Pixel+Motion",
+        "tuned_threshold": 0.103,
+        "auc": null,
+        "before": {
+          "n": 51,
+          "detected": 34,
+          "missed": 17,
+          "recall": 0.6666666666666666
+        },
+        "after": {
+          "n": 51,
+          "detected": 35,
+          "missed": 16,
+          "recall": 0.6862745098039216
+        }
+      },
+      "pixel_consistency": {
+        "label": "Pixel+Consistency",
+        "tuned_threshold": 0.141,
+        "auc": null,
+        "before": {
+          "n": 51,
+          "detected": 34,
+          "missed": 17,
+          "recall": 0.6666666666666666
+        },
+        "after": {
+          "n": 51,
+          "detected": 37,
+          "missed": 14,
+          "recall": 0.7254901960784313
+        }
+      },
+      "motion_consistency": {
+        "label": "Motion+Consistency",
+        "tuned_threshold": 0.765,
+        "auc": null,
+        "before": {
+          "n": 51,
+          "detected": 37,
+          "missed": 14,
+          "recall": 0.7254901960784313
+        },
+        "after": {
+          "n": 51,
+          "detected": 34,
+          "missed": 17,
+          "recall": 0.6666666666666666
+        }
+      },
+      "pixel_motion_consistency": {
+        "label": "Pixel+Motion+Consistency (ana)",
+        "tuned_threshold": 0.217,
+        "auc": null,
+        "before": {
+          "n": 51,
+          "detected": 32,
+          "missed": 19,
+          "recall": 0.6274509803921569
+        },
+        "after": {
+          "n": 51,
+          "detected": 35,
+          "missed": 16,
+          "recall": 0.6862745098039216
+        }
+      }
+    }
+  }
+}

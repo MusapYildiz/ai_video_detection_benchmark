@@ -1,0 +1,25 @@
+dataset,model,n,accuracy,precision,recall,f1,auc,avg_time_s,params_b,disk_gb,peak_gpu_gb
+AEGIS Hard (ham video),Bizim Model (ham video),436,0.7936,0.8299,0.7385,0.7816,0.8910,0.081,0.094956811,0.443193359375,2.13857421875
+AEGIS Hard (ham video),VideoVeritas,436,0.8784,0.8547,0.9217,0.8869,0.8818,36.670,8.77,16.34,30.17
+AEGIS Hard (ham video),Skyra,436,0.8670,0.9651,0.7615,0.8513,0.8706,16.180,8.29,15.46,20.62
+AEGIS Hard (ham video),IvyFake,436,0.6261,0.5769,0.9722,0.7241,0.7776,26.210,3.75,7.03,12.12
+AEGIS Hard (ham video),BusterX,436,0.6835,0.9271,0.4472,0.6034,0.7051,36.930,4.54,9.66,14.08
+AEGIS Hard (ham video),CoCoVideo,436,0.4518,0.4644,0.6284,0.5341,0.4069,0.360,0.0335,0.3745,0.63
+GenBuster-Bench++,VideoVeritas,2000,0.9195,0.9022,0.9410,0.9212,0.9195,46.160,8.77,16.34,28.55
+GenBuster-Bench++,Bizim Model (ham video),2000,0.8005,0.8450,0.7360,0.7867,0.8695,0.130,0.094956811,0.443193359375,2.13857421875
+GenBuster-Bench++,BusterX,2000,0.7745,0.9669,0.6614,0.7855,0.8292,45.630,4.54,9.66,24.95
+GenBuster-Bench++,IvyFake,2000,0.6320,0.5976,0.8118,0.6885,0.7123,26.810,3.75,7.03,7.58
+GenBuster-Bench++,CoCoVideo,2000,0.5035,0.5023,0.7810,0.6114,0.5176,0.900,0.0335,0.3745,0.63
+GenBuster-Bench++,Skyra,2000,0.5350,0.5182,0.9960,0.6817,0.4994,23.250,8.29,15.46,19.35
+AIGVDBench,VideoVeritas,250,,,0.9640,,,30.060,,,
+AIGVDBench,IvyFake,250,,,0.9520,,,24.470,,,
+AIGVDBench,Bizim Model (ham video),250,,,0.9000,,,0.084,,,
+AIGVDBench,Skyra,250,,,0.7520,,,17.920,,,
+AIGVDBench,BusterX,250,,,0.6480,,,35.310,,,
+AIGVDBench,CoCoVideo,250,,,0.6120,,,1.060,,,
+extra_test (Sora),VideoVeritas,51,,,0.9608,,,29.440,,,
+extra_test (Sora),IvyFake,51,,,0.8431,,,28.480,,,
+extra_test (Sora),CoCoVideo,51,,,0.6863,,,1.890,,,
+extra_test (Sora),Bizim Model (ham video),51,,,0.6275,,,0.089,,,
+extra_test (Sora),Skyra,51,,,0.5294,,,18.700,,,
+extra_test (Sora),BusterX,51,,,0.1765,,,29.380,,,

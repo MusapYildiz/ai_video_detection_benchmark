@@ -1,0 +1,98 @@
+{
+  "tuned_threshold": 0.217,
+  "default_threshold": 0.5,
+  "sources": {
+    "aegis_raw": {
+      "label": "AEGIS Hard (ham video)",
+      "n": 436,
+      "auc": 0.8910445248716438,
+      "before": {
+        "n": 436,
+        "tp": 161,
+        "tn": 185,
+        "fp": 33,
+        "fn": 57,
+        "accuracy": 0.7935779816513762,
+        "precision": 0.8298969072164949,
+        "recall": 0.7385321100917431,
+        "f1": 0.7815533980582524,
+        "fpr": 0.15137614678899083
+      },
+      "after": {
+        "n": 436,
+        "tp": 168,
+        "tn": 180,
+        "fp": 38,
+        "fn": 50,
+        "accuracy": 0.7981651376146789,
+        "precision": 0.8155339805825242,
+        "recall": 0.7706422018348624,
+        "f1": 0.7924528301886793,
+        "fpr": 0.1743119266055046
+      }
+    },
+    "genbuster": {
+      "label": "GenBuster-Bench++",
+      "n": 2000,
+      "auc": 0.869541,
+      "before": {
+        "n": 2000,
+        "tp": 736,
+        "tn": 865,
+        "fp": 135,
+        "fn": 264,
+        "accuracy": 0.8005,
+        "precision": 0.8450057405281286,
+        "recall": 0.736,
+        "f1": 0.786745056119722,
+        "fpr": 0.135
+      },
+      "after": {
+        "n": 2000,
+        "tp": 755,
+        "tn": 848,
+        "fp": 152,
+        "fn": 245,
+        "accuracy": 0.8015,
+        "precision": 0.8324145534729879,
+        "recall": 0.755,
+        "f1": 0.7918196119559517,
+        "fpr": 0.152
+      }
+    },
+    "aigvdbench": {
+      "label": "AIGVDBench",
+      "n": 250,
+      "fakeonly": true,
+      "before": {
+        "n": 250,
+        "detected": 225,
+        "missed": 25,
+        "recall": 0.9
+      },
+      "after": {
+        "n": 250,
+        "detected": 230,
+        "missed": 20,
+        "recall": 0.92
+      }
+    },
+    "extra_test": {
+      "label": "extra_test (Sora)",
+      "n": 51,
+      "fakeonly": true,
+      "before": {
+        "n": 51,
+        "detected": 32,
+        "missed": 19,
+        "recall": 0.6274509803921569
+      },
+      "after": {
+        "n": 51,
+        "detected": 35,
+        "missed": 16,
+        "recall": 0.6862745098039216
+      }
+    }
+  }
+}

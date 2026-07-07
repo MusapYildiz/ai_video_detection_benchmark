@@ -1,0 +1,98 @@
+{
+  "source": "genbuster",
+  "model_info": {
+    "n_params_total": 94956811,
+    "n_params_trainable": 9231883,
+    "n_params_frozen": 85724928,
+    "model_size_mb": 379.83,
+    "checkpoint_size_mb": 453.83,
+    "gpu_name": "Tesla V100-SXM2-16GB"
+  },
+  "performance": {
+    "total_inference_time_s": 162.931,
+    "avg_time_per_video_s": 0.0815,
+    "videos_per_second": 12.28,
+    "peak_gpu_memory_mb": 2189.9,
+    "total_videos_processed": 2000
+  },
+  "metrics": {
+    "pixel": {
+      "auc": 0.788025,
+      "f1": 0.7435320584926884,
+      "accuracy": 0.772,
+      "recall": 0.66099999999339,
+      "precision": 0.849614395875969,
+      "fpr": 0.11699999999883,
+      "n": 2000,
+      "n_real": 1000,
+      "n_fake": 1000
+    },
+    "motion": {
+      "auc": 0.452714,
+      "f1": 0.43739748496446146,
+      "accuracy": 0.4855,
+      "recall": 0.399999999996,
+      "precision": 0.4825090470388117,
+      "fpr": 0.42899999999571,
+      "n": 2000,
+      "n_real": 1000,
+      "n_fake": 1000
+    },
+    "consistency": {
+      "auc": 0.758608,
+      "f1": 0.7507598784194529,
+      "accuracy": 0.754,
+      "recall": 0.74099999999259,
+      "precision": 0.7607802874665217,
+      "fpr": 0.23299999999767,
+      "n": 2000,
+      "n_real": 1000,
+      "n_fake": 1000
+    },
+    "pixel+motion": {
+      "auc": 0.7917544999999999,
+      "f1": 0.7164179104477612,
+      "accuracy": 0.753,
+      "recall": 0.62399999999376,
+      "precision": 0.8409703503929788,
+      "fpr": 0.11799999999882,
+      "n": 2000,
+      "n_real": 1000,
+      "n_fake": 1000
+    },
+    "pixel+consistency": {
+      "auc": 0.76803,
+      "f1": 0.7335120643431635,
+      "accuracy": 0.7515,
+      "recall": 0.68399999999316,
+      "precision": 0.7907514450775636,
+      "fpr": 0.18099999999819,
+      "n": 2000,
+      "n_real": 1000,
+      "n_fake": 1000
+    },
+    "motion+consistency": {
+      "auc": 0.768757,
+      "f1": 0.7350608143839239,
+      "accuracy": 0.7495,
+      "recall": 0.69499999999305,
+      "precision": 0.7800224466803589,
+      "fpr": 0.19599999999804,
+      "n": 2000,
+      "n_real": 1000,
+      "n_fake": 1000
+    },
+    "pixel+motion+consistency (ana)": {
+      "auc": 0.794819,
+      "f1": 0.7246214245653393,
+      "accuracy": 0.7545,
+      "recall": 0.64599999999354,
+      "precision": 0.8250319284696676,
+      "fpr": 0.13699999999863,
+      "n": 2000,
+      "n_real": 1000,
+      "n_fake": 1000
+    }
+  },
+  "generator_breakdown": {}
+}

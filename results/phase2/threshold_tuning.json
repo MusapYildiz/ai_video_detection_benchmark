@@ -1,0 +1,50 @@
+{
+  "score_key": "pixel_motion_consistency",
+  "val_n": 4908,
+  "val_auc": 0.9979761051683959,
+  "default_threshold": 0.5,
+  "default_metrics_on_val": {
+    "n": 4908,
+    "tp": 2106,
+    "tn": 2689,
+    "fp": 60,
+    "fn": 53,
+    "accuracy": 0.9769763651181744,
+    "precision": 0.9722991689750693,
+    "recall": 0.9754515979620194,
+    "f1": 0.9738728323699423,
+    "fpr": 0.021826118588577664
+  },
+  "f1_optimal": {
+    "threshold": 0.217,
+    "metrics_on_val": {
+      "n": 4908,
+      "tp": 2115,
+      "tn": 2684,
+      "fp": 65,
+      "fn": 44,
+      "accuracy": 0.9777913610431948,
+      "precision": 0.9701834862385321,
+      "recall": 0.9796201945345067,
+      "f1": 0.9748790043788891,
+      "fpr": 0.02364496180429247
+    }
+  },
+  "youden_j_optimal": {
+    "threshold": 0.217,
+    "metrics_on_val": {
+      "n": 4908,
+      "tp": 2115,
+      "tn": 2684,
+      "fp": 65,
+      "fn": 44,
+      "accuracy": 0.9777913610431948,
+      "precision": 0.9701834862385321,
+      "recall": 0.9796201945345067,
+      "f1": 0.9748790043788891,
+      "fpr": 0.02364496180429247
+    }
+  },
+  "chosen_threshold": 0.217,
+  "chosen_method": "f1_optimal"
+}
