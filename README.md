@@ -19,6 +19,8 @@ ai_video_detector/
 
   # .gitignore ile dışlanan, sadece sunucuda bulunan klasörler:
   checkpoints/            Model ağırlıkları (.pt) + ham analiz çıktıları (results/'a kopyalanan kaynak)
+                          .pt dosyaları GitHub'da değil, Hugging Face Hub'da yayınlanıyor —
+                          bkz. Checkpoint bölümü
   datasets/               Tüm video/tensor verisi
   other_models/           6 rakip modelin tam kodu (lisans/boyut nedeniyle yayınlanmıyor)
 ```
@@ -164,14 +166,28 @@ Video (B, 16, 3, 224, 224)
 
 ## Checkpoint
 
+Model ağırlıkları (`.pt`) boyut nedeniyle GitHub'da değil, **Hugging Face Hub**'da:
+**https://huggingface.co/MusapYildiz/aegis-video-detector** (public — best + last + tüm epoch 1-20)
+
+```bash
+# Tek dosya indirme
+pip install huggingface_hub
+python3 -c "
+from huggingface_hub import hf_hub_download
+path = hf_hub_download('MusapYildiz/aegis-video-detector', 'checkpoint_best.pt',
+                        local_dir='\$AEGIS_BASE_DIR/checkpoints/phase2')
+print(path)
+"
+
+# Tüm repoyu (best+last+epochs, ~9.2 GB) indirme
+hf download MusapYildiz/aegis-video-detector --local-dir $AEGIS_BASE_DIR/checkpoints/phase2
 ```
-En iyi: $AEGIS_BASE_DIR/checkpoints/phase2/checkpoint_best.pt
-        Epoch 7/20, Val AUC=0.9980, Val FPR=0.0218
 
-Tüm epochlar:
-        $AEGIS_BASE_DIR/checkpoints/phase2/epochs/checkpoint_epoch00N.pt
-
-Geçmiş: $AEGIS_BASE_DIR/checkpoints/phase2/history.json
+```
+En iyi: checkpoint_best.pt — Epoch 7/20, Val AUC=0.9980, Val FPR=0.0218
+Son:    checkpoint_last.pt — Epoch 20/20 (eğitim sonu, en iyi epoch değil)
+Tüm epochlar: epochs/checkpoint_epoch00N.pt (1-20)
+Geçmiş (sunucuda): $AEGIS_BASE_DIR/checkpoints/phase2/history.json
 ```
 
 **Epoch seçim notu:** Val loss kriteri ile epoch 3-4 daha iyi (overfitting epoch 5'te başlıyor), ama Val AUC ve GenBuster'da epoch 7 daha dengeli. Epoch 4 AEGIS AUC'de en yüksek (0.901) ama FPR'de kötü.
