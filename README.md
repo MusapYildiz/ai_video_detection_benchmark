@@ -30,6 +30,120 @@ Kendi sunucunuzda çalıştırmak için `export AEGIS_BASE_DIR=/senin/yolun` yet
 
 ---
 
+## Kullanım
+
+Bu bölüm, sistemi baştan kurup çalıştırmak için gereken adımları özetler. Repoda
+`requirements.txt` yok (henüz eklenmedi) — aşağıdaki paket listesi kaynak koddaki
+import'lardan çıkarıldı.
+
+### 1) Ortam Kurulumu
+
+```bash
+# Python 3.10 ile test edildi
+python3 -m venv venv && source venv/bin/activate
+
+pip install torch torchvision           # CUDA'lı GPU için uygun torch sürümünü kurun
+pip install timm einops opencv-python numpy scipy pandas tqdm \
+            matplotlib scikit-learn safetensors pillow
+
+export AEGIS_BASE_DIR=/senin/yolun      # datasets/ ve checkpoints/ hangi kökte olacak
+```
+
+`checkpoints/` (model ağırlıkları) ve `datasets/` (video/tensor verisi) repoya dahil
+değil (gitignore'lu, boyut nedeniyle) — bunları ayrıca temin edip `$AEGIS_BASE_DIR`
+altına yerleştirmeniz gerekiyor. DINOv2 ağırlıkları ilk çalıştırmada `torch.hub` /
+`timm` üzerinden otomatik indiriliyor (internet erişimi gerekir).
+
+### 2) Tek Video / Klasör Analizi (en hızlı deneme yolu)
+
+```bash
+cd src/branches
+
+# Tek video
+python3 inference.py \
+  --video /path/to/video.mp4 \
+  --checkpoint $AEGIS_BASE_DIR/checkpoints/phase2/checkpoint_best.pt \
+  --output_json sonuc.json
+
+# Bir klasördeki tüm videolar
+python3 inference.py \
+  --dir /path/to/video_folder/ \
+  --checkpoint $AEGIS_BASE_DIR/checkpoints/phase2/checkpoint_best.pt \
+  --output_json sonuclar.json
+
+# --device auto (varsayılan) cuda varsa otomatik kullanır; --device cpu ile zorlanabilir
+```
+
+**Dikkat:** `inference.py`'nin `--checkpoint` varsayılanı `checkpoints/phase1/...` (eski,
+Faz 1) — güncel/en iyi modeli (Faz 2, Epoch 7, Val AUC=0.998) kullanmak için yukarıdaki
+gibi **her zaman phase2 checkpoint'ini elle belirtin**.
+
+Çıktıda ana `ai_probability`'nin yanında 6 alt-kombinasyon skoru da (pixel/motion/
+consistency tekil + PM/PC/MC ikili) rapor edilir.
+
+### 3) Eğitim
+
+```bash
+cd src/branches
+python3 train.py \
+  --final_dataset_dir $AEGIS_BASE_DIR/datasets/final_dataset/preprocessed \
+  --epochs 20 --batch_size 16 --lr 1e-4 \
+  --save_dir $AEGIS_BASE_DIR/checkpoints/phase2
+  # --resume $AEGIS_BASE_DIR/checkpoints/phase2/checkpoint_last.pt ile kaldığı yerden devam eder
+```
+
+`--final_dataset_dir` altında `train/index.csv` ve `val/index.csv` (ön-işlenmiş `.pt`
+tensörlere işaret eden) bulunmalı — bunlar `preprocess_final.py` ile üretilir
+(bkz. Veri hazırlama pipeline'ı).
+
+### 4) Değerlendirme / Analiz Pipeline'ı (çalıştırma sırası)
+
+Aşağıdaki sıra izlenirse her adım bir öncekinin çıktısını kullanır; skorlar bir kere
+kaydedildikten sonra tekrar inference çalıştırmaya gerek kalmaz.
+
+```bash
+cd src/branches
+
+# 1. Ham skorları kaydet (7 kombinasyon × seçilen kaynak)
+python3 save_scores.py --source all --checkpoint $AEGIS_BASE_DIR/checkpoints/phase2/checkpoint_best.pt
+
+# 2. Ablation metrikleri (timing + bellek dahil)
+python3 ablation_eval.py --source aegis_raw
+
+# 3. Val-optimal threshold analizi (kaydedilmiş skorlardan, inference gerektirmez)
+python3 threshold_tuning.py
+python3 threshold_tuning_ablation.py
+
+# 4. Branch disagreement / korelasyon / kalibrasyon
+python3 branch_analysis.py --source aegis_raw
+python3 calibration_analysis.py --source aegis_raw
+
+# 5. Bizim model + 5 rakip modelin tüm test setlerinde karşılaştırması
+python3 build_full_comparison.py
+```
+
+### 5) Diğer Modellerle Karşılaştırma
+
+```bash
+cd benchmark_scripts
+
+# 1. Test klasöründen ground-truth manifest üret
+python3 build_manifest.py --root $AEGIS_BASE_DIR/datasets/aegis_full/videos/test_data \
+  --output manifest.csv
+
+# 2. Her modelin kendi inference scriptini çalıştır (model ağırlıkları ayrıca temin edilmeli)
+python3 infer_busterx.py --model_path /path/to/busterx_weights \
+  --video_dir $AEGIS_BASE_DIR/datasets/aegis_full/videos/test_data --output busterx_results.csv
+# infer_cocovideo.py / infer_ivyfake.py / infer_videoveritas.py / skyra_model_engine_hf.py
+# için de benzer şekilde --video_dir ve --output kullanılır
+
+# 3. Sonuçları manifest ile birleştirip metrik hesapla
+python3 compute_metrics.py --manifest manifest.csv \
+  --result busterx_results.csv --output comparison_report.csv
+```
+
+---
+
 ## Mimari (Faz 2 — Aktif)
 
 ```
